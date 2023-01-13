@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deploy
+  labels:
+    app: test-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      name: test-pod
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: test-container
+        image: ishtiaq99/in-cluster
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: pull-secret
